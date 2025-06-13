@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>stupendous.id</title>
+  <style>
+    :root {
+      --green: #25D366;
+      --white: #ffffff;
+      --text-dark: #000000;
+      --gray: #f7f7f7;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background-color: var(--white);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      background: var(--white);
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      animation: slideDown 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes slideDown {
+      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(-50px); }
+    }
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--green);
+      transition: 0.3s ease;
+    }
+    header h1:hover {
+      transform: scale(1.1);
+    }
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    nav ul li {
+      cursor: pointer;
+      transition: 0.3s ease;
+      position: relative;
+    }
+    nav ul li::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background-color: var(--green);
+      bottom: -4px;
+      left: 0;
+      transition: 0.3s;
+    }
+    nav ul li:hover::after {
+      width: 100%;
+    }
+    .hero {
+      height: 100vh;
+      background: url('/img/hero.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--green);
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid var(--white);
+      width: 0;
+      animation: typing 2s steps(30, end) forwards, blink 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    .hero-content p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 2s;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .hero-content button {
+      background: var(--green);
+      color: var(--white);
+      padding: 0.75rem 1.5rem;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      transition: 0.3s;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 2.5s;
+    }
+    .hero-content button:hover {
+      background: #1da851;
+      transform: scale(1.05);
+    }
+    .catalog {
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .catalog h3 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--green);
+      position: relative;
+    }
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .product {
+      background: var(--white);
+      color: var(--text-dark);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: row;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease, transform 0.3s ease;
+    }
+    .product.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .product:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    }
+    .product img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .product img:hover {
+      transform: scale(1.05);
+    }
+    .product-title {
+      padding: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    footer {
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      font-size: 0.875rem;
+      color: #555;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--green);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .whatsapp-float img {
+      width: 30px;
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>stupendous.id</h1>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Tentang</li>
+        <li>Katalog</li>
+        <li>Kontak</li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Cetak Tanpa Batas</h2>
+      <p>Buat desainmu jadi nyata bareng stupendous.id</p>
+      <button onclick="document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });">Lihat Katalog</button>
+    </div>
+  </section>
+
+  <section id="catalog" class="catalog">
+    <h3>Katalog Produk</h3>
+    <div class="list" id="product-list"></div>
+  </section>
+
+  <footer>
+    &copy; 2025 stupendous.id | All rights reserved.
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/6287776333324" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Chat via WhatsApp">
+  </a>
+
+  <script>
+    const productList = document.getElementById("product-list");
+    for (let i = 1; i <= 20; i++) {
+      const div = document.createElement("div");
+      div.className = "product";
+      div.innerHTML = `
+        <img src="/dummy/product-${(i % 5) + 1}.jpg" alt="Produk Sablon ${i}" />
+        <div class="product-title">Produk Sablon ${i}</div>
+      `;
+      productList.appendChild(div);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    const items = document.querySelectorAll('.product');
+    items.forEach(item => observer.observe(item));
+  </script>
+</body>
+</html>
